@@ -5,15 +5,11 @@ import "mapbox-gl/dist/mapbox-gl.css";
 mapboxgl.accessToken =
   "pk.eyJ1IjoiaGFpbGV5cGFuIiwiYSI6ImNtMmk1aTAzdTBqaXgya3EzczBuOTU0b3QifQ.Vfmnzm0EW8Z-3Dp3PhE8Aw";
 
-
-const MapboxExample = () => {
+const Map = () => {
   const mapContainerRef = useRef(null);
   const mapRef = useRef(null);
 
-  
-
   useEffect(() => {
-    // Initialize the map when the component is mounted
     mapRef.current = new mapboxgl.Map({
       container: mapContainerRef.current,
       style: "mapbox://styles/mapbox/navigation-night-v1",
@@ -21,23 +17,23 @@ const MapboxExample = () => {
       zoom: 15,
     });
 
-    // Cleanup function to remove the map when the component is unmounted
+    // dynamic sizing of map
+    const handleResize = () => {
+      mapRef.current.resize();
+    };
+    window.addEventListener("resize", handleResize);
+
     return () => {
       if (mapRef.current) {
         mapRef.current.remove();
       }
+      window.removeEventListener("resize", handleResize);
     };
   }, []);
 
   return (
-    <div>
-      <div
-        ref={mapContainerRef}
-        style={{ width: "100%", height: "1000px" }}
-        className="map-container"
-      />
-    </div>
+    <div ref={mapContainerRef} className="w-full h-full absolute inset-0" />
   );
 };
 
-export default MapboxExample;
+export default Map;

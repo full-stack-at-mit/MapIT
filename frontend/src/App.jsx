@@ -1,16 +1,20 @@
-import React, { useRef, useEffect } from "react";
-import mapboxgl from "mapbox-gl";
-import Map from "./Map.jsx";
+import React, { useState } from "react";
+import Map from "./Map";
+import Sidebar from "./Sidebar";
 import "./App.css";
 
-mapboxgl.accessToken =
-  "pk.eyJ1IjoiaGFpbGV5cGFuIiwiYSI6ImNtMmk1aTAzdTBqaXgya3EzczBuOTU0b3QifQ.Vfmnzm0EW8Z-3Dp3PhE8Aw";
-
 function App() {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
+
   return (
-    <>
+    <div className="relative h-screen w-screen">
+      <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
       <Map />
-    </>
+    </div>
   );
 }
 
