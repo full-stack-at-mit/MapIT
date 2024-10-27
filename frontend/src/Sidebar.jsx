@@ -1,26 +1,23 @@
 import React from "react";
+import ActionBar from "./ActionBar";
 
 const Sidebar = ({ isOpen, toggleSidebar }) => {
   return (
     <div
       className={`bg-white text-black transition-all duration-300 ease-in-out fixed top-0 left-0 h-full ${
-        isOpen ? "w-64" : "w-10"
-      } flex flex-col items-center`}
-      style={{ zIndex: 10 }} // want to overlay sidebar
+        isOpen ? "w-64" : "w-14"
+      } flex flex-col items-center shadow-lg`}
+      style={{ zIndex: 10 }}
     >
-      <button
-        onClick={toggleSidebar}
-        className="absolute top-1/2 -right-4 transform bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded-r-md shadow-lg"
-      >
-        {isOpen ? "<" : ">"}
-      </button>
-
       {isOpen && (
-        <div className="p-4 space-y-4">
+        <div className="p-4 space-y-4 w-full">
           <h2 className="text-xl font-semibold">MapIT</h2>
           <p className="text-sm">Welcome!</p>
         </div>
       )}
+      <div className="absolute top-1/2 -right-4 transform -translate-y-1/2">
+        <ActionBar toggleSidebar={toggleSidebar} isOpen={isOpen} />
+      </div>
     </div>
   );
 };
