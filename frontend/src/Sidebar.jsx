@@ -3,7 +3,7 @@ import React from "react";
 const Sidebar = ({ isOpen, toggleSidebar }) => {
   return (
     <div
-      className={`bg-gray-800 text-white transition-all duration-300 ease-in-out fixed top-0 left-0 h-full ${
+      className={`bg-white text-black transition-all duration-300 ease-in-out fixed top-0 left-0 h-full ${
         isOpen ? "w-64" : "w-10"
       } flex flex-col items-center`}
       style={{ zIndex: 10 }} // want to overlay sidebar
