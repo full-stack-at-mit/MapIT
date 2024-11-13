@@ -1,12 +1,13 @@
 import React from 'react'
 import Layout from '../components/Layout'
 import { NavLink } from "react-router-dom";
+import "../index.css"
 
 const Home = () => {
   return (
     <Layout>
       <div className="container text-center my-5">
-      <h1>MIT Campus Map</h1>
+      <h1 className=''>MIT Campus Map</h1>
       <div className="mt-5">
         <h3>Get Started</h3>
         <p>Explore the links below:</p>
