@@ -5,7 +5,7 @@ import {
   Route,
   Outlet,
 } from "react-router-dom";
-
+// push test
 import Home from "./pages/Home.js";
 import Dashboard from "./pages/Dashboard.js";
 import Register from "./pages/Register.js";
