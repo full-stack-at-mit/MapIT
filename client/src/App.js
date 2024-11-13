@@ -1,46 +1,67 @@
-import {
-  BrowserRouter,
-  Navigate,
-  Routes,
-  Route,
-  Outlet,
-} from "react-router-dom";
+// import {
+//   BrowserRouter,
+//   Navigate,
+//   Routes,
+//   Route,
+//   Outlet,
+// } from "react-router-dom";
 
-import Home from "./pages/Home.js";
-import Dashboard from "./pages/Dashboard.js";
-import Register from "./pages/Register.js";
-import Login from "./pages/Login.js";
-import { useSelector } from "react-redux";
+// import Home from "./pages/Home.js";
+// import Dashboard from "./pages/Dashboard.js";
+// import Register from "./pages/Register.js";
+// import Login from "./pages/Login.js";
+// import { useSelector } from "react-redux";
 
-const PrivateRoutes = () => {
-  const { isAuth } = useSelector((state) => state.auth);
-  // check if user is authenticated. if so, render outlet (content for the page)
-  return <>{isAuth ? <Outlet /> : <Navigate to="/login" />}</>;
-};
+// const PrivateRoutes = () => {
+//   const { isAuth } = useSelector((state) => state.auth);
+//   // check if user is authenticated. if so, render outlet (content for the page)
+//   return <>{isAuth ? <Outlet /> : <Navigate to="/login" />}</>;
+// };
 
-const RestrictedRoutes = () => {
-  const { isAuth } = useSelector((state) => state.auth);
+// const RestrictedRoutes = () => {
+//   const { isAuth } = useSelector((state) => state.auth);
 
-  return <>{!isAuth ? <Outlet /> : <Navigate to="/dashboard" />}</>;
-};
+//   return <>{!isAuth ? <Outlet /> : <Navigate to="/dashboard" />}</>;
+// };
 
-const App = () => {
+// const App = () => {
+//   return (
+//     <BrowserRouter>
+//       <Routes>
+//         <Route path="/" element={<Home />} />
+
+//         <Route element={<PrivateRoutes />}>
+//           <Route path="/dashboard" element={<Dashboard />} />
+//         </Route>
+
+//         <Route element={<RestrictedRoutes />}>
+//           <Route path="/register" element={<Register />} />
+//           <Route path="/login" element={<Login />} />
+//         </Route>
+//       </Routes>
+//     </BrowserRouter>
+//   );
+// };
+
+// export default App;
+import React, { useState } from "react";
+import Map from "./pages/Map";
+import Sidebar from "./components/Sidebar";
+import './index.css'
+
+function App() {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
+
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Home />} />
-
-        <Route element={<PrivateRoutes />}>
-          <Route path="/dashboard" element={<Dashboard />} />
-        </Route>
-
-        <Route element={<RestrictedRoutes />}>
-          <Route path="/register" element={<Register />} />
-          <Route path="/login" element={<Login />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+    <div className="relative h-screen w-screen">
+      <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
+      <Map />
+    </div>
   );
-};
+}
 
 export default App;
